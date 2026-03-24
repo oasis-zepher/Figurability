@@ -100,6 +100,62 @@
       transform: translateY(-1px);
       opacity: 0.92;
     }
+
+    .preview-shell {
+      position: relative;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.18), transparent 28%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.08));
+    }
+
+    .preview-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1.25rem;
+    }
+
+    .preview-fallback-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.78);
+      color: #0f172a;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .preview-fallback-title {
+      max-width: 18rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--text-main);
+    }
+
+    .preview-fallback-note {
+      margin-top: 0.45rem;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-subtle);
+    }
+
+    .preview-image {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
@@ -265,14 +321,25 @@
             >数据缺失</span>
           `;
 
+        const previewLabel = `${item.category} Module`;
+
         return `
           <article class="gallery-card glass overflow-hidden rounded-[24px]">
-            <div class="aspect-[16/10] overflow-hidden">
+            <div class="preview-shell aspect-[16/10] overflow-hidden">
+              <div data-preview-fallback class="preview-fallback">
+                <span class="preview-fallback-badge">${escapeHtml(previewLabel)}</span>
+                <div>
+                  <div class="preview-fallback-title">${escapeHtml(item.chart_name)}</div>
+                  <p class="preview-fallback-note">Preview image unavailable. The card remains usable for browsing code and sample data.</p>
+                </div>
+              </div>
               <img
                 src="${escapeHtml(item.image_path)}"
                 alt="${escapeHtml(item.chart_name)} preview"
-                class="h-full w-full object-cover"
+                class="preview-image"
                 loading="lazy"
+                onload="handleImageLoad(this)"
+                onerror="handleImageError(this)"
               />
             </div>
             <div class="p-5">
@@ -305,6 +372,23 @@
       renderCategoryBar();
       renderCards(filtered);
       renderStatus(filtered.length);
+    }
+
+    function handleImageLoad(image) {
+      const fallback = image.parentElement.querySelector("[data-preview-fallback]");
+      if (fallback) {
+        fallback.classList.add("hidden");
+      }
+      image.classList.remove("hidden");
+    }
+
+    function handleImageError(image) {
+      image.classList.add("hidden");
+      image.removeAttribute("alt");
+      const fallback = image.parentElement.querySelector("[data-preview-fallback]");
+      if (fallback) {
+        fallback.classList.remove("hidden");
+      }
     }
 
     function hydrateItems(items) {
