@@ -1,242 +1,330 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Figurability | Bioinformatics Visualization Gallery</title>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<style>
-		:root {
-			color-scheme: light dark;
-			--bg-main: #f3f6f8;
-			--bg-accent: radial-gradient(circle at 10% 20%, rgba(9, 132, 227, 0.14), transparent 40%),
-									 radial-gradient(circle at 80% 0%, rgba(245, 124, 0, 0.12), transparent 35%),
-									 linear-gradient(160deg, #f3f6f8 0%, #ffffff 100%);
-			--text-main: #0f172a;
-			--text-subtle: #334155;
-			--card-bg: rgba(255, 255, 255, 0.8);
-			--card-border: rgba(15, 23, 42, 0.12);
-			--chip-bg: rgba(2, 132, 199, 0.1);
-			--chip-text: #075985;
-			--btn-primary: #0f766e;
-			--btn-primary-hover: #115e59;
-			--btn-secondary: #9a3412;
-			--btn-secondary-hover: #7c2d12;
-		}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figurability | Chart Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.12), transparent 24%),
+        linear-gradient(180deg, #f6f7fb 0%, #ffffff 100%);
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.92);
+      --border: rgba(15, 23, 42, 0.12);
+      --text-main: #0f172a;
+      --text-subtle: #475569;
+      --chip-bg: rgba(14, 165, 233, 0.12);
+      --chip-text: #075985;
+      --shadow: 0 18px 48px rgba(15, 23, 42, 0.10);
+      --hero-shadow: 0 28px 80px rgba(15, 23, 42, 0.10);
+      --btn-code: #0f766e;
+      --btn-code-hover: #115e59;
+      --btn-data: #9333ea;
+      --btn-data-hover: #7e22ce;
+      --btn-filter: rgba(255, 255, 255, 0.72);
+      --btn-filter-active: #0f172a;
+      --btn-filter-active-text: #ffffff;
+    }
 
-		@media (prefers-color-scheme: dark) {
-			:root {
-				--bg-main: #07111b;
-				--bg-accent: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.18), transparent 42%),
-										 radial-gradient(circle at 78% 0%, rgba(251, 146, 60, 0.18), transparent 35%),
-										 linear-gradient(145deg, #07111b 0%, #0f1f2e 100%);
-				--text-main: #e2e8f0;
-				--text-subtle: #cbd5e1;
-				--card-bg: rgba(15, 23, 42, 0.72);
-				--card-border: rgba(148, 163, 184, 0.25);
-				--chip-bg: rgba(56, 189, 248, 0.18);
-				--chip-text: #bae6fd;
-				--btn-primary: #0d9488;
-				--btn-primary-hover: #0f766e;
-				--btn-secondary: #c2410c;
-				--btn-secondary-hover: #9a3412;
-			}
-		}
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:
+          radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 30%),
+          radial-gradient(circle at top right, rgba(167, 139, 250, 0.18), transparent 26%),
+          linear-gradient(180deg, #07111b 0%, #0b1728 100%);
+        --surface: rgba(9, 16, 30, 0.72);
+        --surface-strong: rgba(9, 16, 30, 0.84);
+        --border: rgba(148, 163, 184, 0.18);
+        --text-main: #e5eefb;
+        --text-subtle: #a9b8cc;
+        --chip-bg: rgba(56, 189, 248, 0.14);
+        --chip-text: #bfe8ff;
+        --shadow: 0 18px 48px rgba(2, 6, 23, 0.34);
+        --hero-shadow: 0 28px 80px rgba(2, 6, 23, 0.42);
+        --btn-code: #0d9488;
+        --btn-code-hover: #0f766e;
+        --btn-data: #7c3aed;
+        --btn-data-hover: #6d28d9;
+        --btn-filter: rgba(15, 23, 42, 0.62);
+        --btn-filter-active: #f8fafc;
+        --btn-filter-active-text: #0f172a;
+      }
+    }
 
-		body {
-			background: var(--bg-accent);
-			color: var(--text-main);
-			min-height: 100vh;
-			font-family: "Manrope", "SF Pro Display", "Segoe UI", sans-serif;
-			letter-spacing: 0.01em;
-		}
+    html {
+      scroll-behavior: smooth;
+    }
 
-		.glass {
-			background: var(--card-bg);
-			border: 1px solid var(--card-border);
-			backdrop-filter: blur(10px);
-			-webkit-backdrop-filter: blur(10px);
-		}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: "Inter", "SF Pro Display", "Segoe UI", sans-serif;
+      letter-spacing: 0.01em;
+    }
 
-		.card-enter {
-			opacity: 0;
-			transform: translateY(10px) scale(0.98);
-			animation: cardIn 0.45s ease forwards;
-		}
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
 
-		@keyframes cardIn {
-			to {
-				opacity: 1;
-				transform: translateY(0) scale(1);
-			}
-		}
-	</style>
+    .hero {
+      background:
+        linear-gradient(135deg, var(--surface-strong), rgba(255, 255, 255, 0.44));
+      box-shadow: var(--hero-shadow);
+    }
+
+    .gallery-card {
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 52px rgba(15, 23, 42, 0.16);
+      border-color: rgba(14, 165, 233, 0.22);
+    }
+
+    .filter-chip {
+      transition: transform 140ms ease, opacity 140ms ease, background 140ms ease;
+    }
+
+    .filter-chip:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+    }
+  </style>
 </head>
 <body>
-	<div class="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12">
-		<header class="mb-8 rounded-2xl p-6 md:p-8 glass">
-			<div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-				<div>
-					<p class="text-sm tracking-[0.16em] uppercase" style="color: var(--text-subtle);">Bioinformatics Visualization Atlas</p>
-					<h1 class="mt-2 text-3xl font-extrabold md:text-5xl">Figurability</h1>
-					<p class="mt-3 max-w-2xl text-sm md:text-base" style="color: var(--text-subtle);">
-						A curated gallery of reusable scientific plotting templates with source code and demo-ready data.
-					</p>
-				</div>
-				<div class="w-full max-w-lg">
-					<label for="searchInput" class="mb-2 block text-sm font-medium" style="color: var(--text-subtle);">Search by chart name</label>
-					<input
-						id="searchInput"
-						type="text"
-						placeholder="Try: sankey, ribbon, correlation..."
-						class="w-full rounded-xl border px-4 py-3 text-sm outline-none transition"
-						style="background: rgba(255,255,255,0.08); border-color: var(--card-border); color: var(--text-main);"
-					/>
-				</div>
-			</div>
+  <div class="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12">
+    <header class="hero glass mb-8 overflow-hidden rounded-[28px] p-6 md:p-9">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em]" style="color: var(--text-subtle);">
+            Open-source Bioinformatics Visualization Library
+          </p>
+          <h1 class="mt-3 text-4xl font-black tracking-tight md:text-6xl">Figurability</h1>
+          <p class="mt-4 max-w-2xl text-sm leading-7 md:text-base" style="color: var(--text-subtle);">
+            A responsive chart gallery for bioinformatics and data science figures, powered by flat folders,
+            auto-scanned metadata, and GitHub Pages-ready front-end assets.
+          </p>
+        </div>
 
-			<div id="categoryBar" class="mt-5 flex flex-wrap gap-2"></div>
-		</header>
+        <div class="w-full max-w-xl">
+          <label for="searchInput" class="mb-2 block text-sm font-semibold" style="color: var(--text-subtle);">
+            Search charts
+          </label>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by chart name..."
+            class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition md:text-base"
+            style="background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-main);"
+          />
+        </div>
+      </div>
 
-		<main>
-			<section id="status" class="mb-4 text-sm" style="color: var(--text-subtle);"></section>
-			<section id="galleryGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3"></section>
-			<section id="emptyState" class="hidden rounded-2xl p-8 text-center glass">
-				<h2 class="text-xl font-bold">No matching charts</h2>
-				<p class="mt-2 text-sm" style="color: var(--text-subtle);">Try another keyword or switch to a different category.</p>
-			</section>
-		</main>
+      <div class="mt-6 flex flex-wrap gap-3" id="categoryBar"></div>
+    </header>
 
-		<footer class="mt-10 border-t pt-6 text-center text-sm" style="border-color: var(--card-border); color: var(--text-subtle);">
-			Created with ❤️ by Zephyr
-		</footer>
-	</div>
+    <section class="mb-5 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <p id="statusText" class="text-sm font-medium" style="color: var(--text-subtle);"></p>
+      <p class="text-xs uppercase tracking-[0.22em]" style="color: var(--text-subtle);">
+        GitHub Pages Ready
+      </p>
+    </section>
 
-	<script>
-		const state = {
-			allItems: [],
-			activeCategory: "All",
-			searchText: ""
-		};
+    <main>
+      <section id="galleryGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"></section>
 
-		const els = {
-			categoryBar: document.getElementById("categoryBar"),
-			searchInput: document.getElementById("searchInput"),
-			galleryGrid: document.getElementById("galleryGrid"),
-			emptyState: document.getElementById("emptyState"),
-			status: document.getElementById("status")
-		};
+      <section id="emptyState" class="glass hidden rounded-[24px] px-6 py-12 text-center">
+        <h2 class="text-2xl font-bold">No matching charts</h2>
+        <p class="mt-3 text-sm md:text-base" style="color: var(--text-subtle);">
+          Try another keyword or switch to a different category.
+        </p>
+      </section>
+    </main>
 
-		function escapeHtml(text) {
-			return String(text)
-				.replaceAll("&", "&amp;")
-				.replaceAll("<", "&lt;")
-				.replaceAll(">", "&gt;")
-				.replaceAll('"', "&quot;")
-				.replaceAll("'", "&#039;");
-		}
+    <footer class="mt-12 border-t pt-6 text-center text-sm" style="border-color: var(--border); color: var(--text-subtle);">
+      Created with ❤️ by Zephyr
+    </footer>
+  </div>
 
-		function getCategories(items) {
-			const set = new Set(items.map(item => item.category).filter(Boolean));
-			return ["All", ...Array.from(set).sort((a, b) => a.localeCompare(b))];
-		}
+  <script>
+    const state = {
+      items: [],
+      activeCategory: "All",
+      searchText: ""
+    };
 
-		function renderCategoryButtons(categories) {
-			els.categoryBar.innerHTML = categories.map(category => {
-				const active = state.activeCategory === category;
-				const style = active
-					? "background: var(--btn-primary); color: #ffffff; border-color: transparent;"
-					: "background: transparent; color: var(--text-subtle); border-color: var(--card-border);";
-				return `
-					<button
-						class="rounded-full border px-4 py-2 text-sm font-semibold transition hover:opacity-85"
-						style="${style}"
-						data-category="${escapeHtml(category)}"
-						type="button"
-					>${escapeHtml(category)}</button>
-				`;
-			}).join("");
-		}
+    const els = {
+      searchInput: document.getElementById("searchInput"),
+      categoryBar: document.getElementById("categoryBar"),
+      galleryGrid: document.getElementById("galleryGrid"),
+      emptyState: document.getElementById("emptyState"),
+      statusText: document.getElementById("statusText")
+    };
 
-		function filterItems() {
-			const search = state.searchText.trim().toLowerCase();
-			return state.allItems.filter(item => {
-				const byCategory = state.activeCategory === "All" || item.category === state.activeCategory;
-				const bySearch = !search || item.chart_name.toLowerCase().includes(search);
-				return byCategory && bySearch;
-			});
-		}
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
 
-		function renderCards(items) {
-			els.galleryGrid.innerHTML = items.map((item, index) => {
-				const codeBtn = item.code_path
-					? `<a href="${escapeHtml(item.code_path)}" class="rounded-lg px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90" style="background: var(--btn-primary);">👉 获取代码</a>`
-					: `<span class="rounded-lg px-3 py-2 text-sm font-semibold opacity-50" style="background: var(--chip-bg); color: var(--chip-text);">代码缺失</span>`;
+    function getCategories(items) {
+      const categories = Array.from(new Set(items.map(item => item.category).filter(Boolean)));
+      return ["All", ...categories.sort((a, b) => a.localeCompare(b))];
+    }
 
-				const dataBtn = item.data_path
-					? `<a href="${escapeHtml(item.data_path)}" class="rounded-lg px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90" style="background: var(--btn-secondary);">📦 示例数据</a>`
-					: `<span class="rounded-lg px-3 py-2 text-sm font-semibold opacity-50" style="background: var(--chip-bg); color: var(--chip-text);">数据缺失</span>`;
+    function renderCategoryBar() {
+      const categories = getCategories(state.items);
+      els.categoryBar.innerHTML = categories.map(category => {
+        const active = category === state.activeCategory;
+        const style = active
+          ? `background:${"var(--btn-filter-active)"};color:${"var(--btn-filter-active-text)"};border-color:transparent;`
+          : `background:${"var(--btn-filter)"};color:${"var(--text-subtle)"};border-color:${"var(--border)"};`;
 
-				return `
-					<article class="card-enter overflow-hidden rounded-2xl glass" style="animation-delay: ${Math.min(index * 0.04, 0.4)}s;">
-						<img
-							src="${escapeHtml(item.image_path)}"
-							alt="${escapeHtml(item.chart_name)} preview"
-							loading="lazy"
-							class="h-56 w-full object-cover"
-							onerror="this.style.opacity='0.2'; this.alt='preview unavailable';"
-						/>
-						<div class="p-4">
-							<div class="inline-block rounded-full px-3 py-1 text-xs font-semibold" style="background: var(--chip-bg); color: var(--chip-text);">
-								${escapeHtml(item.category)}
-							</div>
-							<h3 class="mt-3 text-lg font-bold">${escapeHtml(item.chart_name)}</h3>
-							<div class="mt-4 flex items-center gap-2">${codeBtn}${dataBtn}</div>
-						</div>
-					</article>
-				`;
-			}).join("");
+        return `
+          <button
+            type="button"
+            data-category="${escapeHtml(category)}"
+            class="filter-chip rounded-full border px-4 py-2 text-sm font-semibold"
+            style="${style}"
+          >
+            ${escapeHtml(category)}
+          </button>
+        `;
+      }).join("");
+    }
 
-			els.emptyState.classList.toggle("hidden", items.length > 0);
-		}
+    function getFilteredItems() {
+      const query = state.searchText.trim().toLowerCase();
+      return state.items.filter(item => {
+        const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
+        const matchesSearch = !query || item.chart_name.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+    }
 
-		function render() {
-			const filtered = filterItems();
-			renderCards(filtered);
-			els.status.textContent = `Showing ${filtered.length} of ${state.allItems.length} chart(s)`;
-			renderCategoryButtons(getCategories(state.allItems));
-		}
+    function renderCards(items) {
+      els.galleryGrid.innerHTML = items.map(item => {
+        const codeButton = item.code_path
+          ? `
+            <a
+              href="${escapeHtml(item.code_path)}"
+              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
+              style="background:${"var(--btn-code)"};"
+              onmouseover="this.style.background='var(--btn-code-hover)'"
+              onmouseout="this.style.background='var(--btn-code)'"
+            >👉 获取代码</a>
+          `
+          : `
+            <span
+              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold opacity-60"
+              style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};"
+            >代码缺失</span>
+          `;
 
-		async function init() {
-			try {
-				const response = await fetch("./gallery_data.json", { cache: "no-cache" });
-				if (!response.ok) {
-					throw new Error(`HTTP ${response.status}`);
-				}
-				state.allItems = await response.json();
-				render();
-			} catch (error) {
-				els.status.textContent = `Failed to load gallery data: ${error.message}`;
-				els.galleryGrid.innerHTML = "";
-				els.emptyState.classList.remove("hidden");
-			}
-		}
+        const dataButton = item.data_path
+          ? `
+            <a
+              href="${escapeHtml(item.data_path)}"
+              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
+              style="background:${"var(--btn-data)"};"
+              onmouseover="this.style.background='var(--btn-data-hover)'"
+              onmouseout="this.style.background='var(--btn-data)'"
+            >📦 示例数据</a>
+          `
+          : `
+            <span
+              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold opacity-60"
+              style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};"
+            >数据缺失</span>
+          `;
 
-		els.searchInput.addEventListener("input", (event) => {
-			state.searchText = event.target.value;
-			render();
-		});
+        return `
+          <article class="gallery-card glass overflow-hidden rounded-[24px]">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img
+                src="${escapeHtml(item.image_path)}"
+                alt="${escapeHtml(item.chart_name)} preview"
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-5">
+              <div class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+                style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};">
+                ${escapeHtml(item.category)}
+              </div>
+              <h3 class="mt-3 text-xl font-bold">${escapeHtml(item.chart_name)}</h3>
+              <p class="mt-2 text-sm leading-6" style="color: var(--text-subtle);">
+                Reusable visualization asset with ready-to-browse preview, source script, and example data.
+              </p>
+              <div class="mt-5 flex gap-3">
+                ${codeButton}
+                ${dataButton}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
 
-		els.categoryBar.addEventListener("click", (event) => {
-			const button = event.target.closest("button[data-category]");
-			if (!button) {
-				return;
-			}
-			state.activeCategory = button.dataset.category;
-			render();
-		});
+      els.emptyState.classList.toggle("hidden", items.length !== 0);
+    }
 
-		init();
-	</script>
+    function renderStatus(filteredCount) {
+      els.statusText.textContent = `Showing ${filteredCount} of ${state.items.length} chart(s)`;
+    }
+
+    function render() {
+      const filtered = getFilteredItems();
+      renderCategoryBar();
+      renderCards(filtered);
+      renderStatus(filtered.length);
+    }
+
+    async function init() {
+      try {
+        const response = await fetch("./gallery_data.json", { cache: "no-cache" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        state.items = await response.json();
+        render();
+      } catch (error) {
+        els.galleryGrid.innerHTML = "";
+        els.emptyState.classList.remove("hidden");
+        els.statusText.textContent = `Failed to load gallery_data.json: ${error.message}`;
+      }
+    }
+
+    els.searchInput.addEventListener("input", event => {
+      state.searchText = event.target.value || "";
+      render();
+    });
+
+    els.categoryBar.addEventListener("click", event => {
+      const button = event.target.closest("button[data-category]");
+      if (!button) {
+        return;
+      }
+      state.activeCategory = button.dataset.category;
+      render();
+    });
+
+    init();
+  </script>
 </body>
 </html>
