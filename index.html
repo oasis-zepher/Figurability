@@ -160,6 +160,7 @@
   <script>
     const state = {
       items: [],
+      randomizedItems: [],
       activeCategory: "All",
       searchText: ""
     };
@@ -186,6 +187,15 @@
       return ["All", ...categories.sort((a, b) => a.localeCompare(b))];
     }
 
+    function shuffleItems(items) {
+      const shuffled = [...items];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+      }
+      return shuffled;
+    }
+
     function renderCategoryBar() {
       const categories = getCategories(state.items);
       els.categoryBar.innerHTML = categories.map(category => {
@@ -209,7 +219,9 @@
 
     function getFilteredItems() {
       const query = state.searchText.trim().toLowerCase();
-      return state.items.filter(item => {
+      const sourceItems = query ? state.items : state.randomizedItems;
+
+      return sourceItems.filter(item => {
         const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
         const matchesSearch = !query || item.chart_name.toLowerCase().includes(query);
         return matchesCategory && matchesSearch;
@@ -302,6 +314,7 @@
         }
 
         state.items = await response.json();
+        state.randomizedItems = shuffleItems(state.items);
         render();
       } catch (error) {
         els.galleryGrid.innerHTML = "";
