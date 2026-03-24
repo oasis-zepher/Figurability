@@ -1,4 +1,4 @@
-library(tidyverse)
+﻿library(tidyverse)
 
 # 1. 设置颜色常量
 COLOR_INITIAL <- "#CD5C5C" 

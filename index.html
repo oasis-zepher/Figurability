@@ -291,11 +291,18 @@
           ? `
             <a
               href="${escapeHtml(item.code_path)}"
-              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
+              download="${escapeHtml(item.code_path.split("/").pop())}"
+              class="flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
               style="background:${"var(--btn-code)"};"
               onmouseover="this.style.background='var(--btn-code-hover)'"
               onmouseout="this.style.background='var(--btn-code)'"
-            >👉 获取代码</a>
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 8 4 12l4 4" />
+                <path d="m16 8 4 4-4 4" />
+              </svg>
+              <span>查看代码</span>
+            </a>
           `
           : `
             <span
@@ -308,11 +315,20 @@
           ? `
             <a
               href="${escapeHtml(item.data_path)}"
-              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
+              download="${escapeHtml(item.data_path.split("/").pop())}"
+              class="flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
               style="background:${"var(--btn-data)"};"
               onmouseover="this.style.background='var(--btn-data-hover)'"
               onmouseout="this.style.background='var(--btn-data)'"
-            >📦 示例数据</a>
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18" />
+                <path d="M7 8h10" />
+                <path d="M7 12h10" />
+                <path d="M7 16h6" />
+              </svg>
+              <span>示例数据</span>
+            </a>
           `
           : `
             <span
