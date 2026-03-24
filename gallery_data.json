@@ -1,0 +1,23 @@
+[
+  {
+    "category": "Clinical Phenotypes",
+    "chart_name": "Clinical Trend Ribbon",
+    "image_path": "06_Clinical_Phenotypes/clinical_trend_ribbon_demo.png",
+    "code_path": "06_Clinical_Phenotypes/clinical_trend_ribbon.R",
+    "data_path": "06_Clinical_Phenotypes/clinical_trend_ribbon_data.csv"
+  },
+  {
+    "category": "Correlation Network",
+    "chart_name": "Pairwise Correlation",
+    "image_path": "05_Correlation_Network/pairwise_correlation_demo.png",
+    "code_path": "05_Correlation_Network/pairwise_correlation.R",
+    "data_path": "05_Correlation_Network/pairwise_correlation_data.csv"
+  },
+  {
+    "category": "Differential Analysis",
+    "chart_name": "Sankey Feature Flow",
+    "image_path": "02_Differential_Analysis/sankey_feature_flow_demo.png",
+    "code_path": "02_Differential_Analysis/sankey_feature_flow.R",
+    "data_path": "02_Differential_Analysis/sankey_feature_flow_data.csv"
+  }
+]
