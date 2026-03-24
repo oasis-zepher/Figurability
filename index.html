@@ -157,6 +157,7 @@
     </footer>
   </div>
 
+  <script src="./gallery_data.js"></script>
   <script>
     const state = {
       items: [],
@@ -306,6 +307,12 @@
       renderStatus(filtered.length);
     }
 
+    function hydrateItems(items) {
+      state.items = Array.isArray(items) ? items : [];
+      state.randomizedItems = shuffleItems(state.items);
+      render();
+    }
+
     async function init() {
       try {
         const response = await fetch("./gallery_data.json", { cache: "no-cache" });
@@ -313,13 +320,16 @@
           throw new Error(`HTTP ${response.status}`);
         }
 
-        state.items = await response.json();
-        state.randomizedItems = shuffleItems(state.items);
-        render();
+        hydrateItems(await response.json());
       } catch (error) {
+        if (Array.isArray(window.__FIGURABILITY_GALLERY__)) {
+          hydrateItems(window.__FIGURABILITY_GALLERY__);
+          return;
+        }
+
         els.galleryGrid.innerHTML = "";
         els.emptyState.classList.remove("hidden");
-        els.statusText.textContent = `Failed to load gallery_data.json: ${error.message}`;
+        els.statusText.textContent = `Failed to load gallery data: ${error.message}`;
       }
     }
 

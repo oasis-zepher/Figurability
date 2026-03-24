@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build ``gallery_data.json`` by scanning flat chart asset folders.
+"""Build gallery metadata files by scanning flat chart asset folders.
 
 This script is intentionally simple and deterministic:
 
@@ -13,8 +13,9 @@ This script is intentionally simple and deterministic:
    - ``_demo.jpeg``
 4. Infer the chart title, matching code file, and matching data file.
 5. Write a clean JSON array to ``gallery_data.json`` in the project root.
+6. Write a JS mirror file to ``gallery_data.js`` for ``file://`` fallback loading.
 
-The generated JSON is consumed directly by ``index.html``.
+The generated files are consumed by ``index.html``.
 """
 
 from __future__ import annotations
@@ -153,16 +154,30 @@ def write_gallery_json(items: list[GalleryItem], output_file: Path) -> None:
     )
 
 
+def write_gallery_js(items: list[GalleryItem], output_file: Path) -> None:
+    """Write a JS mirror so the gallery also works when opened via ``file://``."""
+
+    payload = [asdict(item) for item in items]
+    output_file.write_text(
+        "window.__FIGURABILITY_GALLERY__ = "
+        + json.dumps(payload, indent=2, ensure_ascii=False)
+        + ";\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
     """Entry point for local CLI usage."""
 
     project_root = Path(__file__).resolve().parent.parent
-    output_file = project_root / "gallery_data.json"
+    json_output = project_root / "gallery_data.json"
+    js_output = project_root / "gallery_data.js"
 
     items = collect_gallery_items(project_root)
-    write_gallery_json(items, output_file)
+    write_gallery_json(items, json_output)
+    write_gallery_js(items, js_output)
 
-    print(f"Built {len(items)} gallery item(s) -> {output_file}")
+    print(f"Built {len(items)} gallery item(s) -> {json_output} and {js_output}")
 
 
 if __name__ == "__main__":
