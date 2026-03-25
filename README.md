@@ -25,7 +25,8 @@ Figurability/
 ├── scripts/
 │   └── build_gallery.py
 ├── index.html
-└── gallery_data.json
+├── gallery_data.json
+└── gallery_data.js
 ```
 
 ## Initialize The Scaffold
@@ -51,6 +52,7 @@ touch Figurability/Utils/themes.R
 touch Figurability/scripts/build_gallery.py
 touch Figurability/index.html
 touch Figurability/gallery_data.json
+touch Figurability/gallery_data.js
 ```
 
 ## Build The Gallery Data
@@ -70,6 +72,24 @@ The script will:
 - match same-basename code files (`.R` or `.py`)
 - match same-basename data files (`_data.csv` or `.csv`)
 - write all collected metadata into `gallery_data.json`
+- write a `gallery_data.js` mirror for direct `file://` preview fallback
+
+## Data Policy
+
+Real research datasets should not be committed to this repository.
+
+For every chart card, keep only public-safe files in the gallery:
+
+- the plotting script
+- the rendered preview image
+- a template or synthetic CSV that shows the required columns and value shapes
+
+Recommended practice:
+
+- use mock values, simulated values, or heavily simplified examples
+- keep column names and data types aligned with the real workflow
+- never publish subject-level, patient-level, or otherwise sensitive raw data
+- if a script depends on multiple raw files, provide one compact template CSV plus a short note in the script header
 
 ## Preview Locally
 
@@ -91,7 +111,7 @@ http://localhost:8000
 2. Use one consistent basename for the chart asset group, for example `volcano_pathway`.
 3. Add files using this pattern:
    - `volcano_pathway.R` or `volcano_pathway.py`
-   - `volcano_pathway_data.csv` or `volcano_pathway.csv`
+   - `volcano_pathway_data.csv` or `volcano_pathway.csv` as template/synthetic data
    - `volcano_pathway_demo.png` or `.jpg`
 4. Run:
    - `python3 scripts/build_gallery.py`

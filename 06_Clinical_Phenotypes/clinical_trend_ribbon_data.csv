@@ -1,0 +1,9 @@
+Age,Visual_Acuity_Change,sEV_Protein_Change,RVO_Eye,Type
+46,0.38,0.54,OD,initial
+49,0.44,0.62,OS,initial
+53,0.57,0.71,OD,initial
+58,0.63,0.86,OS,initial
+61,0.69,0.95,OD,recurrent
+65,0.76,1.02,OS,recurrent
+69,0.83,1.08,OD,recurrent
+73,0.88,1.16,OS,recurrent

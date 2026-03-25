@@ -1,0 +1,13 @@
+dataset,from,to,weight
+flow_with_selfloop,X1_intersection,X1_intersection,26
+flow_with_selfloop,X1_signal_only,X1_signal_only,14
+flow_with_selfloop,X1_not_signal,X1_not_signal,10
+flow_with_selfloop,X2_intersection,X2_intersection,22
+flow_with_selfloop,X2_signal_only,X2_signal_only,18
+flow_with_selfloop,X2_not_signal,X2_not_signal,12
+sankey_flow,X1_intersection,X2_intersection,16
+sankey_flow,X1_intersection,X2_signal_only,5
+sankey_flow,X1_signal_only,X2_signal_only,11
+sankey_flow,X1_signal_only,X2_not_signal,3
+sankey_flow,X1_not_signal,X2_not_signal,7
+sankey_flow,X1_not_signal,X2_signal_only,2
