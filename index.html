@@ -103,6 +103,9 @@
 
     .preview-shell {
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background:
         radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
         radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.18), transparent 28%),
@@ -154,7 +157,9 @@
       z-index: 1;
       height: 100%;
       width: 100%;
-      object-fit: cover;
+      padding: 0.85rem;
+      object-fit: contain;
+      object-position: center;
     }
   </style>
 </head>
@@ -209,7 +214,7 @@
     </main>
 
     <footer class="mt-12 border-t pt-6 text-center text-sm" style="border-color: var(--border); color: var(--text-subtle);">
-      Created with ❤️ by Zephyr
+      Created by Zephyr
     </footer>
   </div>
 
