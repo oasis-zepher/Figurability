@@ -69,6 +69,12 @@ Validate that every preview card still has its matching source and data template
 python3 scripts/build_gallery.py --check
 ```
 
+Run the lightweight script tests:
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
 The script will:
 
 - scan every top-level folder whose name starts with digits
