@@ -71,6 +71,23 @@ class BuildGalleryTest(unittest.TestCase):
             ["06_Clinical_Phenotypes: no preview image matched '*_demo.(png|jpg|jpeg)'"],
         )
 
+    def test_collect_validation_issues_reports_duplicate_preview_basenames(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            category = root / "07_Pathway_Enrichment"
+            category.mkdir()
+            (category / "volcano_demo.png").write_text("", encoding="utf-8")
+            (category / "volcano_demo.jpg").write_text("", encoding="utf-8")
+            (category / "volcano.R").write_text("# script", encoding="utf-8")
+            (category / "volcano_data.csv").write_text("x,y\n1,2\n", encoding="utf-8")
+
+            issues = build_gallery.collect_validation_issues(root)
+
+        self.assertEqual(
+            issues,
+            ["07_Pathway_Enrichment/volcano_demo.png: duplicate preview basename 'volcano'"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

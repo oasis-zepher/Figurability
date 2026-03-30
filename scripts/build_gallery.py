@@ -166,8 +166,13 @@ def collect_validation_issues(project_root: Path) -> list[str]:
             issues.append(f"{category_dir.name}: no preview image matched '*_demo.(png|jpg|jpeg)'")
             continue
 
+        seen_basenames: set[str] = set()
         for preview in preview_files:
             base_name = infer_chart_basename(preview)
+            if base_name in seen_basenames:
+                issues.append(f"{category_dir.name}/{preview.name}: duplicate preview basename '{base_name}'")
+                continue
+            seen_basenames.add(base_name)
             if find_matching_code_file(category_dir, base_name) is None:
                 issues.append(f"{category_dir.name}/{preview.name}: missing matching .R or .py source")
             if find_matching_data_file(category_dir, base_name) is None:
