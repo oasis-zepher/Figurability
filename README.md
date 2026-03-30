@@ -63,6 +63,12 @@ Generate or refresh the front-end catalog:
 python3 scripts/build_gallery.py
 ```
 
+Validate that every preview card still has its matching source and data template:
+
+```bash
+python3 scripts/build_gallery.py --check
+```
+
 The script will:
 
 - scan every top-level folder whose name starts with digits
@@ -73,6 +79,7 @@ The script will:
 - match same-basename data files (`_data.csv` or `.csv`)
 - write all collected metadata into `gallery_data.json`
 - write a `gallery_data.js` mirror for direct `file://` preview fallback
+- optionally fail fast in `--check` mode when a preview asset loses its matching code or data file
 
 ## Data Policy
 
@@ -115,6 +122,7 @@ http://localhost:8000
    - `volcano_pathway_demo.png` or `.jpg`
 4. Run:
    - `python3 scripts/build_gallery.py`
+   - `python3 scripts/build_gallery.py --check`
 5. Open the site locally and confirm the new card appears with the correct category, image, code button, and data button.
 6. Commit and push the updated files to GitHub.
 

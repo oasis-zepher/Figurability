@@ -20,8 +20,10 @@ The generated files are consumed by ``index.html``.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
+import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -144,6 +146,36 @@ def collect_gallery_items(project_root: Path) -> list[GalleryItem]:
     return sorted(items, key=lambda item: (item.category, item.chart_name))
 
 
+def collect_validation_issues(project_root: Path) -> list[str]:
+    """Report preview assets that are missing matching code or data files."""
+
+    issues: list[str] = []
+
+    for category_dir in sorted(project_root.iterdir()):
+        if not is_category_dir(category_dir):
+            continue
+
+        preview_files = [
+            preview
+            for preview in sorted(category_dir.iterdir())
+            if preview.is_file()
+            and preview.suffix.lower() in IMAGE_SUFFIXES
+            and re.search(r"_demo$", preview.stem, flags=re.IGNORECASE)
+        ]
+        if not preview_files:
+            issues.append(f"{category_dir.name}: no preview image matched '*_demo.(png|jpg|jpeg)'")
+            continue
+
+        for preview in preview_files:
+            base_name = infer_chart_basename(preview)
+            if find_matching_code_file(category_dir, base_name) is None:
+                issues.append(f"{category_dir.name}/{preview.name}: missing matching .R or .py source")
+            if find_matching_data_file(category_dir, base_name) is None:
+                issues.append(f"{category_dir.name}/{preview.name}: missing matching .csv data template")
+
+    return issues
+
+
 def write_gallery_json(items: list[GalleryItem], output_file: Path) -> None:
     """Write human-readable UTF-8 JSON for the front-end."""
 
@@ -166,10 +198,27 @@ def write_gallery_js(items: list[GalleryItem], output_file: Path) -> None:
     )
 
 
-def main() -> None:
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--project-root",
+        type=Path,
+        default=Path(__file__).resolve().parent.parent,
+        help="Project root to scan. Defaults to the Figurability repository root.",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Fail if any preview asset is missing its matching code or data file.",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
     """Entry point for local CLI usage."""
 
-    project_root = Path(__file__).resolve().parent.parent
+    args = parse_args()
+    project_root = args.project_root.resolve()
     json_output = project_root / "gallery_data.json"
     js_output = project_root / "gallery_data.js"
 
@@ -178,7 +227,18 @@ def main() -> None:
     write_gallery_js(items, js_output)
 
     print(f"Built {len(items)} gallery item(s) -> {json_output} and {js_output}")
+    if not args.check:
+        return 0
+
+    issues = collect_validation_issues(project_root)
+    if not issues:
+        print("Validation passed: every preview has matching code and data files.")
+        return 0
+
+    for issue in issues:
+        print(f"Validation error: {issue}", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
