@@ -2,57 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Figurability | Chart Gallery</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Figurability | Curated Bioinformatics Figure Atlas</title>
+  <meta
+    name="description"
+    content="A curated, GitHub Pages-friendly atlas of reusable bioinformatics charts with preview images, source scripts, and template datasets."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&display=swap"
+    rel="stylesheet"
+  />
   <style>
     :root {
-      color-scheme: light dark;
-      --bg:
-        radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(34, 197, 94, 0.12), transparent 24%),
-        linear-gradient(180deg, #f6f7fb 0%, #ffffff 100%);
-      --surface: rgba(255, 255, 255, 0.82);
-      --surface-strong: rgba(255, 255, 255, 0.92);
-      --border: rgba(15, 23, 42, 0.12);
-      --text-main: #0f172a;
-      --text-subtle: #475569;
-      --chip-bg: rgba(14, 165, 233, 0.12);
-      --chip-text: #075985;
-      --shadow: 0 18px 48px rgba(15, 23, 42, 0.10);
-      --hero-shadow: 0 28px 80px rgba(15, 23, 42, 0.10);
-      --btn-code: #0f8b8d;
-      --btn-code-hover: #0d7274;
-      --btn-data: #7a2336;
-      --btn-data-hover: #621b2b;
-      --btn-filter: rgba(255, 255, 255, 0.72);
-      --btn-filter-active: #0f172a;
-      --btn-filter-active-text: #ffffff;
+      color-scheme: light;
+      --paper-0: oklch(98.7% 0.005 90);
+      --paper-1: oklch(96.8% 0.012 92);
+      --surface-0: oklch(99.4% 0.003 90);
+      --surface-1: oklch(97% 0.009 92);
+      --surface-2: oklch(93.5% 0.014 205);
+      --ink-1: oklch(23% 0.03 244);
+      --ink-2: oklch(39% 0.025 236);
+      --ink-3: oklch(56% 0.018 232);
+      --line-1: oklch(86% 0.014 220);
+      --line-2: oklch(79% 0.02 214);
+      --accent: oklch(47% 0.11 202);
+      --accent-deep: oklch(34% 0.09 208);
+      --accent-soft: oklch(94% 0.03 197);
+      --signal: oklch(54% 0.12 26);
+      --signal-soft: oklch(95% 0.022 28);
+      --shadow-soft: 0 22px 60px rgb(24 38 56 / 0.08);
+      --shadow-strong: 0 34px 90px rgb(24 38 56 / 0.12);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --content-width: 1180px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:
-          radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 30%),
-          radial-gradient(circle at top right, rgba(167, 139, 250, 0.18), transparent 26%),
-          linear-gradient(180deg, #07111b 0%, #0b1728 100%);
-        --surface: rgba(9, 16, 30, 0.72);
-        --surface-strong: rgba(9, 16, 30, 0.84);
-        --border: rgba(148, 163, 184, 0.18);
-        --text-main: #e5eefb;
-        --text-subtle: #a9b8cc;
-        --chip-bg: rgba(56, 189, 248, 0.14);
-        --chip-text: #bfe8ff;
-        --shadow: 0 18px 48px rgba(2, 6, 23, 0.34);
-        --hero-shadow: 0 28px 80px rgba(2, 6, 23, 0.42);
-        --btn-code: #12a0a3;
-        --btn-code-hover: #0f8b8d;
-        --btn-data: #8b2d43;
-        --btn-data-hover: #742538;
-        --btn-filter: rgba(15, 23, 42, 0.62);
-        --btn-filter-active: #f8fafc;
-        --btn-filter-active-text: #0f172a;
-      }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
     html {
@@ -62,159 +52,1079 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: "Inter", "SF Pro Display", "Segoe UI", sans-serif;
-      letter-spacing: 0.01em;
+      background:
+        radial-gradient(circle at top right, oklch(93.8% 0.022 194) 0%, transparent 24%),
+        radial-gradient(circle at 8% 14%, oklch(95.7% 0.02 28) 0%, transparent 18%),
+        linear-gradient(180deg, var(--paper-1) 0%, var(--paper-0) 34%, oklch(99.2% 0.002 92) 100%);
+      color: var(--ink-1);
+      font-family: "Instrument Sans", "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
     }
 
-    .glass {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background:
+        repeating-linear-gradient(
+          to right,
+          transparent 0,
+          transparent 5.5rem,
+          rgb(63 95 126 / 0.1) 5.5rem,
+          rgb(63 95 126 / 0.1) calc(5.5rem + 1px)
+        );
+      mask-image: linear-gradient(180deg, black 0%, black 18rem, transparent 42rem);
+    }
+
+    ::selection {
+      background: color-mix(in oklab, var(--accent) 18%, white);
+      color: var(--ink-1);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    code {
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.45rem;
+      background: color-mix(in oklab, var(--accent-soft) 72%, white);
+      color: var(--accent-deep);
+      font-family: "Instrument Sans", "Segoe UI", sans-serif;
+      font-size: 0.92em;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    :focus-visible {
+      outline: 3px solid color-mix(in oklab, var(--accent) 72%, white);
+      outline-offset: 3px;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding:
+        max(1rem, env(safe-area-inset-top))
+        max(1rem, env(safe-area-inset-right))
+        max(4rem, calc(env(safe-area-inset-bottom) + 2rem))
+        max(1rem, env(safe-area-inset-left));
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--surface-0), color-mix(in oklab, var(--surface-1) 92%, white));
+      border: 1px solid var(--line-1);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .eyebrow,
+    .panel-label,
+    .control-label,
+    .meta-label,
+    .step-label {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .masthead {
+      padding-block: 0.25rem 1rem;
+    }
+
+    .topline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem 1.25rem;
+      padding-block: 0.6rem 1rem;
+      border-bottom: 1px solid var(--line-1);
+      color: var(--ink-3);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .hero {
+      display: grid;
+      gap: 1.6rem;
+      padding-block: clamp(1.75rem, 4vw, 4rem) 1rem;
+    }
+
+    .hero-copy {
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      right: clamp(-1rem, -4vw, -3rem);
+      top: clamp(-1rem, -1vw, -2rem);
+      width: clamp(7rem, 18vw, 13rem);
+      aspect-ratio: 1;
+      z-index: -1;
+      border-radius: 32% 68% 58% 42% / 46% 36% 64% 54%;
       background:
-        linear-gradient(135deg, var(--surface-strong), rgba(255, 255, 255, 0.44));
-      box-shadow: var(--hero-shadow);
+        radial-gradient(circle at 34% 30%, color-mix(in oklab, var(--accent-soft) 70%, white), transparent 50%),
+        linear-gradient(135deg, color-mix(in oklab, var(--accent-soft) 76%, white), color-mix(in oklab, var(--signal-soft) 68%, white));
+      opacity: 0.9;
+      transform: rotate(-12deg);
     }
 
-    .gallery-card {
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    .hero-title {
+      margin: 0.35rem 0 0;
+      max-width: 9ch;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(3.3rem, 10vw, 7.2rem);
+      line-height: 0.92;
+      font-weight: 700;
+      letter-spacing: -0.06em;
     }
 
-    .gallery-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 52px rgba(15, 23, 42, 0.16);
-      border-color: rgba(14, 165, 233, 0.22);
+    .hero-lead {
+      margin: 1.2rem 0 0;
+      max-width: 58ch;
+      font-size: clamp(1rem, 0.35vw + 1rem, 1.28rem);
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.25rem;
+      margin-top: 1.75rem;
+    }
+
+    .primary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-height: 3rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      background: var(--ink-1);
+      color: var(--surface-0);
+      font-weight: 700;
+      box-shadow: 0 16px 40px rgb(24 38 56 / 0.14);
+      transition: transform 160ms var(--ease-out-quart), box-shadow 200ms var(--ease-out-expo);
+    }
+
+    .primary-link svg {
+      flex: none;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .secondary-note {
+      margin: 0;
+      max-width: 32ch;
+      color: var(--ink-3);
+    }
+
+    .hero-index {
+      position: relative;
+      overflow: hidden;
+      padding: 1.25rem;
+      border-radius: 1.75rem;
+    }
+
+    .hero-index::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 0.35rem;
+      background: linear-gradient(90deg, var(--accent), var(--signal));
+    }
+
+    .index-stats {
+      display: grid;
+      gap: 0.15rem;
+      margin-top: 1rem;
+    }
+
+    .index-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.75rem;
+      padding-block: 0.75rem;
+      border-top: 1px solid color-mix(in oklab, var(--line-1) 80%, white);
+    }
+
+    .index-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .index-row dt {
+      color: var(--ink-2);
+    }
+
+    .index-row dd {
+      margin: 0;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-principles {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid color-mix(in oklab, var(--line-1) 80%, white);
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .principle-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      min-height: 2rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--accent-soft) 75%, white);
+      color: var(--accent-deep);
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--ink-2);
+    }
+
+    .summary-band {
+      display: grid;
+      gap: 1.5rem;
+      padding-block: 1.4rem 1.7rem;
+      border-top: 1px solid var(--line-1);
+      border-bottom: 1px solid var(--line-1);
+    }
+
+    .summary-copy h2,
+    .section-head h2 {
+      margin: 0.45rem 0 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-copy p:not(.eyebrow),
+    .section-head p {
+      margin: 1rem 0 0;
+      max-width: 62ch;
+      color: var(--ink-2);
+    }
+
+    .summary-rail {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .summary-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding-block: 0.9rem;
+      border-top: 1px solid color-mix(in oklab, var(--line-1) 80%, white);
+    }
+
+    .summary-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--ink-1);
+    }
+
+    .summary-item p {
+      margin: 0.22rem 0 0;
+      color: var(--ink-3);
+      font-size: 0.94rem;
+    }
+
+    .summary-count {
+      align-self: start;
+      font-weight: 700;
+      color: var(--accent-deep);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .catalog-controls {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.75rem;
+      padding: 1.1rem;
+      border-radius: 1.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.95rem 1rem;
+      border: 1px solid var(--line-1);
+      border-radius: 1.05rem;
+      background: var(--surface-0);
+      color: var(--ink-1);
+      transition:
+        border-color 160ms var(--ease-out-quart),
+        box-shadow 160ms var(--ease-out-quart),
+        transform 160ms var(--ease-out-quart);
+    }
+
+    .search-input::placeholder {
+      color: var(--ink-3);
+    }
+
+    .search-input:focus {
+      border-color: color-mix(in oklab, var(--accent) 55%, white);
+      box-shadow: 0 0 0 4px rgb(38 123 151 / 0.12);
+    }
+
+    .category-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.6rem;
     }
 
     .filter-chip {
-      transition: transform 140ms ease, opacity 140ms ease, background 140ms ease;
-    }
-
-    .filter-chip:hover {
-      transform: translateY(-1px);
-      opacity: 0.92;
-    }
-
-    .preview-shell {
-      position: relative;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.55rem;
+      min-height: 2.75rem;
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-1);
+      background: var(--surface-0);
+      color: var(--ink-2);
+      font-weight: 600;
+      transition:
+        transform 150ms var(--ease-out-quart),
+        border-color 150ms var(--ease-out-quart),
+        background-color 150ms var(--ease-out-quart),
+        color 150ms var(--ease-out-quart);
+    }
+
+    .filter-chip.is-active {
+      border-color: var(--ink-1);
+      background: var(--ink-1);
+      color: var(--surface-0);
+    }
+
+    .filter-chip-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.82;
+    }
+
+    .catalog-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: end;
+      gap: 0.75rem 1.5rem;
+      margin-top: 1.2rem;
+      padding-inline: 0.1rem;
+    }
+
+    .status-text {
+      margin: 0.25rem 0 0;
+      color: var(--ink-1);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .status-note {
+      margin: 0;
+      max-width: 38ch;
+      color: var(--ink-3);
+      text-align: left;
+    }
+
+    .catalog-section {
+      margin-top: 1.2rem;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.75rem 1.5rem;
+      align-items: end;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .catalog-card {
+      --tone: var(--accent);
+      --tone-soft: var(--accent-soft);
+      --tone-ink: var(--accent-deep);
+      --tone-line: color-mix(in oklab, var(--tone) 20%, white);
+      position: relative;
+      grid-column: span 12;
+      overflow: hidden;
+      border: 1px solid color-mix(in oklab, var(--line-1) 86%, var(--tone));
+      border-radius: 1.65rem;
+      background: linear-gradient(180deg, var(--surface-0), color-mix(in oklab, var(--surface-1) 90%, white));
+      box-shadow: var(--shadow-soft);
+      transition:
+        transform 220ms var(--ease-out-expo),
+        box-shadow 220ms var(--ease-out-expo),
+        border-color 220ms var(--ease-out-expo);
+      container-type: inline-size;
+    }
+
+    .card-shell {
+      display: grid;
+      min-height: 100%;
+    }
+
+    .card-visual {
+      position: relative;
+      min-height: 16rem;
+      padding: 1rem;
       background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.18), transparent 28%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.08));
+        linear-gradient(135deg, color-mix(in oklab, var(--tone-soft) 84%, white), color-mix(in oklab, var(--signal-soft) 42%, white)),
+        linear-gradient(180deg, var(--surface-1), var(--surface-0));
+      border-bottom: 1px solid color-mix(in oklab, var(--line-1) 80%, var(--tone));
+    }
+
+    .card-visual::before {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border-radius: 1.15rem;
+      border: 1px solid color-mix(in oklab, var(--tone) 24%, white);
+      pointer-events: none;
+    }
+
+    .card-visual::after {
+      content: "";
+      position: absolute;
+      right: 1.35rem;
+      bottom: 1.3rem;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      border: 1px solid color-mix(in oklab, var(--tone) 22%, white);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .preview-frame {
+      position: relative;
+      min-height: 100%;
+      border-radius: 1rem;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, color-mix(in oklab, var(--tone-soft) 68%, white), transparent 42%),
+        linear-gradient(180deg, color-mix(in oklab, var(--surface-0) 92%, white), color-mix(in oklab, var(--surface-1) 88%, white));
+    }
+
+    .preview-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 0.88);
+      color: var(--tone-ink);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .preview-fallback {
       position: absolute;
       inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 1.25rem;
+      display: grid;
+      align-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem;
     }
 
-    .preview-fallback-badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 9999px;
-      padding: 0.4rem 0.7rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.78);
-      color: #0f172a;
-      border: 1px solid rgba(15, 23, 42, 0.08);
+    .preview-fallback strong {
+      display: block;
+      max-width: 14ch;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.55rem;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
     }
 
-    .preview-fallback-title {
-      max-width: 18rem;
-      font-size: 1.1rem;
-      font-weight: 800;
-      line-height: 1.35;
-      color: var(--text-main);
-    }
-
-    .preview-fallback-note {
-      margin-top: 0.45rem;
-      font-size: 0.88rem;
-      line-height: 1.6;
-      color: var(--text-subtle);
+    .preview-fallback p {
+      margin: 0.45rem 0 0;
+      max-width: 25ch;
+      color: var(--ink-2);
     }
 
     .preview-image {
       position: absolute;
       inset: 0;
-      z-index: 1;
-      height: 100%;
       width: 100%;
-      padding: 0.85rem;
+      height: 100%;
+      padding: 1.15rem;
       object-fit: contain;
       object-position: center;
+      transition: transform 280ms var(--ease-out-expo);
+    }
+
+    .card-body {
+      display: grid;
+      gap: 0.95rem;
+      padding: 1.2rem;
+    }
+
+    .card-index-mark {
+      margin: 0;
+      color: color-mix(in oklab, var(--tone-ink) 52%, white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .card-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.36rem 0.8rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--tone-soft) 82%, white);
+      color: var(--tone-ink);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .asset-line {
+      color: var(--ink-3);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .card-title {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .card-summary,
+    .card-meta {
+      margin: 0;
+      color: var(--ink-2);
+    }
+
+    .card-meta {
+      display: grid;
+      gap: 0.24rem;
+      font-size: 0.94rem;
+      color: var(--ink-3);
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      flex: 1 1 11rem;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      min-height: 2.9rem;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-1);
+      font-weight: 700;
+      transition:
+        transform 150ms var(--ease-out-quart),
+        border-color 150ms var(--ease-out-quart),
+        background-color 150ms var(--ease-out-quart),
+        box-shadow 150ms var(--ease-out-quart);
+    }
+
+    .action-link svg {
+      flex: none;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .action-link.primary {
+      background: var(--ink-1);
+      color: var(--surface-0);
+      border-color: var(--ink-1);
+    }
+
+    .action-link.secondary {
+      background: var(--surface-0);
+      color: var(--ink-1);
+      border-color: color-mix(in oklab, var(--line-2) 78%, var(--tone));
+    }
+
+    .action-link.disabled {
+      background: var(--surface-1);
+      color: var(--ink-3);
+      pointer-events: none;
+    }
+
+    .empty-state {
+      display: grid;
+      justify-items: start;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+      padding: 1.35rem;
+      border-radius: 1.4rem;
+      border: 1px solid var(--line-1);
+      background: linear-gradient(180deg, var(--surface-0), color-mix(in oklab, var(--surface-1) 90%, white));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .empty-state h3 {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--ink-2);
+      max-width: 44ch;
+    }
+
+    .empty-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.9rem;
+      padding: 0.78rem 1rem;
+      border-radius: 999px;
+      background: var(--ink-1);
+      color: var(--surface-0);
+      font-weight: 700;
+    }
+
+    .protocol-band {
+      margin-top: 3rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--line-1);
+    }
+
+    .protocol-head {
+      margin-bottom: 1.4rem;
+    }
+
+    .protocol-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .protocol-card {
+      padding: 1.15rem;
+      border-radius: 1.45rem;
+      border: 1px solid var(--line-1);
+      background: linear-gradient(180deg, var(--surface-0), color-mix(in oklab, var(--surface-1) 92%, white));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .protocol-card h3 {
+      margin: 0.5rem 0 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.75rem;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .protocol-card p:not(.step-label) {
+      margin: 0.8rem 0 0;
+      color: var(--ink-2);
+    }
+
+    .site-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem 1.5rem;
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line-1);
+      color: var(--ink-3);
+      font-size: 0.94rem;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise-in 720ms var(--ease-out-expo) forwards;
+      animation-delay: calc(var(--delay, 0) * 80ms);
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 760px) {
+      .catalog-card {
+        grid-column: span 6;
+      }
+
+      .catalog-card.is-full,
+      .catalog-card.is-featured {
+        grid-column: span 12;
+      }
+
+      .protocol-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 980px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+        align-items: end;
+      }
+
+      .summary-band,
+      .catalog-controls,
+      .section-head {
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+      }
+
+      .catalog-controls {
+        align-items: end;
+      }
+    }
+
+    @media (min-width: 1120px) {
+      .catalog-card {
+        grid-column: span 6;
+      }
+
+      .catalog-card.is-full {
+        grid-column: span 12;
+      }
+
+      .catalog-card.is-third {
+        grid-column: span 4;
+      }
+
+      .catalog-card.is-featured {
+        grid-column: span 7;
+      }
+
+      .catalog-card.is-wide {
+        grid-column: span 5;
+      }
+    }
+
+    @container (min-width: 42rem) {
+      .card-shell {
+        grid-template-columns: minmax(18rem, 1.15fr) minmax(14rem, 0.85fr);
+      }
+
+      .card-visual {
+        min-height: 100%;
+        border-right: 1px solid color-mix(in oklab, var(--line-1) 80%, var(--tone));
+        border-bottom: 0;
+      }
+
+      .card-body {
+        padding: 1.35rem;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .primary-link:hover,
+      .filter-chip:hover,
+      .action-link:hover,
+      .empty-action:hover {
+        transform: translateY(-2px);
+      }
+
+      .catalog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-strong);
+        border-color: color-mix(in oklab, var(--tone) 35%, white);
+      }
+
+      .catalog-card:hover .preview-image {
+        transform: scale(1.02);
+      }
+    }
+
+    @media (pointer: coarse) {
+      .filter-chip,
+      .action-link,
+      .empty-action,
+      .primary-link {
+        min-height: 3rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="mx-auto max-w-7xl px-4 py-8 md:px-8 md:py-12">
-    <header class="hero glass mb-8 overflow-hidden rounded-[28px] p-6 md:p-9">
-      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <div class="max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-[0.24em]" style="color: var(--text-subtle);">
-            Open-source Bioinformatics Visualization Library
-          </p>
-          <h1 class="mt-3 text-4xl font-black tracking-tight md:text-6xl">Figurability</h1>
-          <p class="mt-4 max-w-2xl text-sm leading-7 md:text-base" style="color: var(--text-subtle);">
-            A responsive chart gallery for bioinformatics and data science figures, powered by flat folders,
-            auto-scanned metadata, and GitHub Pages-ready front-end assets.
-          </p>
-        </div>
-
-        <div class="w-full max-w-xl">
-          <label for="searchInput" class="mb-2 block text-sm font-semibold" style="color: var(--text-subtle);">
-            Search charts
-          </label>
-          <input
-            id="searchInput"
-            type="search"
-            placeholder="Search by chart name..."
-            class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition md:text-base"
-            style="background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-main);"
-          />
-        </div>
+  <div class="site-shell">
+    <header class="masthead" data-reveal style="--delay: 0;">
+      <div class="topline">
+        <span>Open-source figure library</span>
+        <span>Flat folders · GitHub Pages friendly</span>
       </div>
 
-      <div class="mt-6 flex flex-wrap gap-3" id="categoryBar"></div>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Curated Bioinformatics Figure Atlas</p>
+          <h1 class="hero-title">Figurability</h1>
+          <p class="hero-lead">
+            A light-weight gallery for reusable bioinformatics and data science charts, where each entry keeps the
+            preview image, source script, and template data close enough to browse like a research atlas rather than a file dump.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-link" href="#library">
+              <span>Browse the atlas</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m13 6 6 6-6 6" />
+              </svg>
+            </a>
+            <p class="secondary-note">Built for researchers who want to inspect the method before they trust the asset.</p>
+          </div>
+        </div>
+
+        <aside class="hero-index panel" aria-label="Library index">
+          <p class="panel-label">Library index</p>
+          <dl id="heroIndex" class="index-stats"></dl>
+
+          <div class="hero-principles">
+            <div class="principle">
+              <span class="principle-index">01</span>
+              <p>Every chart stays browseable with preview, script, and data contract close at hand.</p>
+            </div>
+            <div class="principle">
+              <span class="principle-index">02</span>
+              <p>The layout favors scanability and editorial hierarchy over dashboard-like visual clutter.</p>
+            </div>
+            <div class="principle">
+              <span class="principle-index">03</span>
+              <p>Static hosting remains first-class so the catalogue can stay lightweight and easy to extend.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
     </header>
 
-    <section class="mb-5 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <p id="statusText" class="text-sm font-medium" style="color: var(--text-subtle);"></p>
-      <p class="text-xs uppercase tracking-[0.22em]" style="color: var(--text-subtle);">
-        GitHub Pages Ready
+    <section class="summary-band" aria-labelledby="summaryTitle" data-reveal style="--delay: 1;">
+      <div class="summary-copy">
+        <p class="eyebrow">Library premise</p>
+        <h2 id="summaryTitle">Charts are presented as reusable methods, not isolated files.</h2>
+        <p>
+          Figurability treats the catalogue like a small scientific atlas: strong hierarchy, direct asset access,
+          and enough annotation to scan quickly without reading dense documentation first.
+        </p>
+      </div>
+
+      <div id="summaryRail" class="summary-rail" aria-label="Category summary"></div>
+    </section>
+
+    <section class="catalog-controls panel" aria-label="Catalog controls" data-reveal style="--delay: 2;">
+      <div class="search-block">
+        <label for="searchInput" class="control-label">Search the atlas</label>
+        <input
+          id="searchInput"
+          class="search-input"
+          type="search"
+          placeholder="Search titles, modules, or file types"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="filter-block">
+        <p class="control-label">Filter by module</p>
+        <div id="categoryBar" class="category-bar"></div>
+      </div>
+    </section>
+
+    <section class="catalog-meta" data-reveal style="--delay: 3;">
+      <div>
+        <p class="meta-label">Current slice</p>
+        <p id="statusText" class="status-text"></p>
+      </div>
+      <p class="status-note">
+        The page fetches <code>gallery_data.json</code> first and falls back to <code>gallery_data.js</code> for <code>file://</code> previews.
       </p>
     </section>
 
-    <main>
-      <section id="galleryGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"></section>
-
-      <section id="emptyState" class="glass hidden rounded-[24px] px-6 py-12 text-center">
-        <h2 class="text-2xl font-bold">No matching charts</h2>
-        <p class="mt-3 text-sm md:text-base" style="color: var(--text-subtle);">
-          Try another keyword or switch to a different category.
+    <main id="library" class="catalog-section">
+      <div class="section-head" data-reveal style="--delay: 4;">
+        <div>
+          <p class="eyebrow">Atlas catalogue</p>
+          <h2>Browse the current collection.</h2>
+        </div>
+        <p>
+          The front end stays simple enough for static hosting, but the presentation treats each figure as a curated
+          visualization pattern you can adopt, adapt, or extend.
         </p>
+      </div>
+
+      <noscript>
+        <div class="empty-state">
+          <h3>JavaScript is required to load the gallery catalogue.</h3>
+          <p>Enable JavaScript or open <code>gallery_data.json</code> directly to inspect the available assets.</p>
+        </div>
+      </noscript>
+
+      <section id="galleryGrid" class="catalog-grid" aria-live="polite"></section>
+
+      <section id="emptyState" class="empty-state" hidden>
+        <h3 id="emptyTitle">No matching charts</h3>
+        <p id="emptyCopy">Try another keyword or reset the current filters.</p>
+        <button id="emptyAction" type="button" class="empty-action">Reset filters</button>
       </section>
     </main>
 
-    <footer class="mt-12 border-t pt-6 text-center text-sm" style="border-color: var(--border); color: var(--text-subtle);">
-      Created by Zephyr
+    <section class="protocol-band" aria-labelledby="protocolTitle" data-reveal style="--delay: 5;">
+      <div class="section-head protocol-head">
+        <div>
+          <p class="eyebrow">Contribution flow</p>
+          <h2 id="protocolTitle">Keep the gallery extendable.</h2>
+        </div>
+        <p>
+          New entries should remain as easy to add as the current ones: one consistent basename, one preview image,
+          one plotting script, and one public-safe template dataset.
+        </p>
+      </div>
+
+      <div class="protocol-grid">
+        <article class="protocol-card">
+          <p class="step-label">01</p>
+          <h3>Drop in the chart trio</h3>
+          <p>
+            Add a preview image, a plotting script, and a template CSV using one shared basename inside a numeric
+            top-level module folder.
+          </p>
+        </article>
+
+        <article class="protocol-card">
+          <p class="step-label">02</p>
+          <h3>Rebuild the catalogue</h3>
+          <p>Run <code>python3 scripts/build_gallery.py</code> so the static front-end data stays synchronized with the flat-folder library.</p>
+        </article>
+
+        <article class="protocol-card">
+          <p class="step-label">03</p>
+          <h3>Preview and publish</h3>
+          <p>
+            Open the site locally or on GitHub Pages and verify that the new figure appears with the right category,
+            preview, and linked assets.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>Created by Zephyr for reusable bioinformatics visualization work.</p>
+      <p>Designed as a lightweight atlas for script-first research workflows.</p>
     </footer>
   </div>
 
@@ -224,19 +1134,48 @@
       items: [],
       randomizedItems: [],
       activeCategory: "All",
-      searchText: ""
+      searchText: "",
+      errorMessage: ""
     };
 
     const els = {
+      heroIndex: document.getElementById("heroIndex"),
+      summaryRail: document.getElementById("summaryRail"),
       searchInput: document.getElementById("searchInput"),
       categoryBar: document.getElementById("categoryBar"),
+      statusText: document.getElementById("statusText"),
       galleryGrid: document.getElementById("galleryGrid"),
       emptyState: document.getElementById("emptyState"),
-      statusText: document.getElementById("statusText")
+      emptyTitle: document.getElementById("emptyTitle"),
+      emptyCopy: document.getElementById("emptyCopy"),
+      emptyAction: document.getElementById("emptyAction")
     };
 
-    function escapeHtml(text) {
-      return String(text)
+    const tonePalette = [
+      {
+        accent: "oklch(47% 0.11 202)",
+        soft: "oklch(94% 0.03 197)",
+        ink: "oklch(34% 0.09 208)"
+      },
+      {
+        accent: "oklch(54% 0.12 26)",
+        soft: "oklch(95% 0.022 28)",
+        ink: "oklch(37% 0.08 28)"
+      },
+      {
+        accent: "oklch(53% 0.09 145)",
+        soft: "oklch(95% 0.02 150)",
+        ink: "oklch(36% 0.06 160)"
+      },
+      {
+        accent: "oklch(45% 0.07 252)",
+        soft: "oklch(95% 0.015 250)",
+        ink: "oklch(29% 0.05 248)"
+      }
+    ];
+
+    function escapeHtml(value) {
+      return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
@@ -244,183 +1183,520 @@
         .replaceAll("'", "&#039;");
     }
 
+    function normaliseQuery(value) {
+      return String(value ?? "").trim().toLowerCase();
+    }
+
+    function hashString(value) {
+      let hash = 0;
+
+      for (const char of String(value)) {
+        hash = (hash << 5) - hash + char.charCodeAt(0);
+        hash |= 0;
+      }
+
+      return Math.abs(hash);
+    }
+
+    function toneForCategory(category) {
+      return tonePalette[hashString(category) % tonePalette.length];
+    }
+
     function getCategories(items) {
       const categories = Array.from(new Set(items.map(item => item.category).filter(Boolean)));
-      return ["All", ...categories.sort((a, b) => a.localeCompare(b))];
+      return ["All", ...categories.sort((left, right) => left.localeCompare(right))];
+    }
+
+    function getCategoryCounts(items) {
+      const counts = new Map();
+
+      for (const item of items) {
+        if (!item.category) {
+          continue;
+        }
+
+        counts.set(item.category, (counts.get(item.category) || 0) + 1);
+      }
+
+      return counts;
     }
 
     function shuffleItems(items) {
       const shuffled = [...items];
+
       for (let index = shuffled.length - 1; index > 0; index -= 1) {
         const randomIndex = Math.floor(Math.random() * (index + 1));
         [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
       }
+
       return shuffled;
     }
 
+    function getSearchHaystack(item) {
+      return [item.chart_name, item.category, item.code_path, item.data_path]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+    }
+
+    function getFilteredItems() {
+      const query = normaliseQuery(state.searchText);
+      const sourceItems = query ? state.items : state.randomizedItems;
+
+      return sourceItems.filter(item => {
+        const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
+        const matchesSearch = !query || getSearchHaystack(item).includes(query);
+        return matchesCategory && matchesSearch;
+      });
+    }
+
+    function getExtension(path) {
+      if (!path || !path.includes(".")) {
+        return "";
+      }
+
+      return path.split(".").pop().toLowerCase();
+    }
+
+    function getCodeLabel(path) {
+      const extension = getExtension(path);
+
+      if (extension === "r") {
+        return "R";
+      }
+
+      if (extension === "py") {
+        return "Python";
+      }
+
+      if (extension === "ipynb") {
+        return "Notebook";
+      }
+
+      return extension ? extension.toUpperCase() : "";
+    }
+
+    function getDominantLanguage(items) {
+      if (!items.length) {
+        return "TBD";
+      }
+
+      const counts = new Map();
+
+      for (const item of items) {
+        const label = getCodeLabel(item.code_path) || "Unspecified";
+        counts.set(label, (counts.get(label) || 0) + 1);
+      }
+
+      const [topLabel] = [...counts.entries()].sort((left, right) => right[1] - left[1])[0];
+      return `${topLabel}-first`;
+    }
+
+    function getCoverage(items, predicate) {
+      if (!items.length) {
+        return "0%";
+      }
+
+      const count = items.filter(predicate).length;
+      return `${Math.round((count / items.length) * 100)}%`;
+    }
+
+    function getCategoryNarrative(category) {
+      const normalized = normaliseQuery(category);
+
+      if (normalized.includes("correlation")) {
+        return "Designed for pairwise structure, association strength, and visually dense relationship mapping.";
+      }
+
+      if (normalized.includes("clinical")) {
+        return "Built for phenotype trajectories, cohort patterns, and clinician-readable longitudinal views.";
+      }
+
+      if (normalized.includes("differential")) {
+        return "Shaped for before-versus-after contrasts, feature shifts, and publication-ready comparison logic.";
+      }
+
+      return "Reusable visualization asset with a preview surface, inspectable source, and a public-safe template dataset.";
+    }
+
+    function getCategoryPrompt(category) {
+      const normalized = normaliseQuery(category);
+
+      if (normalized.includes("correlation")) {
+        return "Network-oriented relationships";
+      }
+
+      if (normalized.includes("clinical")) {
+        return "Phenotype-facing trajectories";
+      }
+
+      if (normalized.includes("differential")) {
+        return "Comparative feature movement";
+      }
+
+      return "Reusable chart module";
+    }
+
+    function buildAssetDescriptor(item) {
+      const parts = [];
+      const codeLabel = getCodeLabel(item.code_path);
+
+      if (codeLabel) {
+        parts.push(`${codeLabel} script`);
+      }
+
+      if (item.data_path) {
+        const dataExtension = getExtension(item.data_path);
+        parts.push(`${(dataExtension || "Template").toUpperCase()} template`);
+      }
+
+      return parts.join(" · ");
+    }
+
+    function formatCardIndex(index) {
+      return String(index + 1).padStart(2, "0");
+    }
+
+    function getLayoutClass(index, total) {
+      if (total <= 0) {
+        return "";
+      }
+
+      if (total === 1) {
+        return "is-full";
+      }
+
+      if (total === 2) {
+        return "";
+      }
+
+      if (total === 3) {
+        return index === 2 ? "is-full" : "";
+      }
+
+      if (total === 4) {
+        return "";
+      }
+
+      const remainder = total % 5;
+      const patternedCount = total - remainder;
+
+      if (index < patternedCount) {
+        const patternIndex = index % 5;
+
+        if (patternIndex === 0) {
+          return "is-featured";
+        }
+
+        if (patternIndex === 1) {
+          return "is-wide";
+        }
+
+        return "is-third";
+      }
+
+      const tailIndex = index - patternedCount;
+
+      if (remainder === 1) {
+        return "is-full";
+      }
+
+      if (remainder === 2) {
+        return "";
+      }
+
+      if (remainder === 3) {
+        return tailIndex === 2 ? "is-full" : "";
+      }
+
+      return "";
+    }
+
+    function buildActionLink(path, label, variant) {
+      if (!path) {
+        return `
+          <span class="action-link disabled ${variant}">
+            <span>${escapeHtml(label)} unavailable</span>
+          </span>
+        `;
+      }
+
+      const icon = variant === "primary"
+        ? `
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 8 4 12l4 4" />
+            <path d="m16 8 4 4-4 4" />
+          </svg>
+        `
+        : `
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18" />
+            <path d="M7 8h10" />
+            <path d="M7 12h10" />
+            <path d="M7 16h6" />
+          </svg>
+        `;
+
+      return `
+        <a href="${escapeHtml(path)}" target="_blank" rel="noopener" class="action-link ${variant}">
+          ${icon}
+          <span>${escapeHtml(label)}</span>
+        </a>
+      `;
+    }
+
+    function renderHeroIndex() {
+      const categories = getCategories(state.items).length - 1;
+      const rows = [
+        { label: "Charts catalogued", value: state.items.length || "0" },
+        { label: "Modules represented", value: categories || "0" },
+        { label: "Template coverage", value: getCoverage(state.items, item => Boolean(item.data_path)) },
+        { label: "Primary stack", value: getDominantLanguage(state.items) }
+      ];
+
+      els.heroIndex.innerHTML = rows.map(row => `
+        <div class="index-row">
+          <dt>${escapeHtml(row.label)}</dt>
+          <dd>${escapeHtml(row.value)}</dd>
+        </div>
+      `).join("");
+    }
+
+    function renderSummaryRail() {
+      const counts = [...getCategoryCounts(state.items).entries()]
+        .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
+
+      if (!counts.length) {
+        els.summaryRail.innerHTML = `
+          <div class="summary-item">
+            <div>
+              <strong>Awaiting catalogue data</strong>
+              <p>The atlas summary will populate as soon as gallery metadata becomes available.</p>
+            </div>
+            <span class="summary-count">00</span>
+          </div>
+        `;
+        return;
+      }
+
+      els.summaryRail.innerHTML = counts.map(([category, count]) => `
+        <div class="summary-item">
+          <div>
+            <strong>${escapeHtml(category)}</strong>
+            <p>${escapeHtml(getCategoryPrompt(category))}</p>
+          </div>
+          <span class="summary-count">${escapeHtml(String(count).padStart(2, "0"))}</span>
+        </div>
+      `).join("");
+    }
+
     function renderCategoryBar() {
+      const counts = getCategoryCounts(state.items);
       const categories = getCategories(state.items);
+
       els.categoryBar.innerHTML = categories.map(category => {
         const active = category === state.activeCategory;
-        const style = active
-          ? `background:${"var(--btn-filter-active)"};color:${"var(--btn-filter-active-text)"};border-color:transparent;`
-          : `background:${"var(--btn-filter)"};color:${"var(--text-subtle)"};border-color:${"var(--border)"};`;
+        const count = category === "All" ? state.items.length : counts.get(category) || 0;
 
         return `
           <button
             type="button"
             data-category="${escapeHtml(category)}"
-            class="filter-chip rounded-full border px-4 py-2 text-sm font-semibold"
-            style="${style}"
+            class="filter-chip${active ? " is-active" : ""}"
           >
-            ${escapeHtml(category)}
+            <span>${escapeHtml(category)}</span>
+            <span class="filter-chip-count">${escapeHtml(String(count))}</span>
           </button>
         `;
       }).join("");
     }
 
-    function getFilteredItems() {
-      const query = state.searchText.trim().toLowerCase();
-      const sourceItems = query ? state.items : state.randomizedItems;
+    function renderStatus(filteredItems) {
+      const total = state.items.length;
+      const categories = getCategories(state.items).length - 1;
+      const query = state.searchText.trim();
 
-      return sourceItems.filter(item => {
-        const matchesCategory = state.activeCategory === "All" || item.category === state.activeCategory;
-        const matchesSearch = !query || item.chart_name.toLowerCase().includes(query);
-        return matchesCategory && matchesSearch;
-      });
+      if (state.errorMessage && !total) {
+        els.statusText.textContent = "The atlas could not load its catalogue data.";
+        return;
+      }
+
+      if (!total) {
+        els.statusText.textContent = "No charts have been catalogued yet.";
+        return;
+      }
+
+      if (!filteredItems.length) {
+        els.statusText.textContent = query
+          ? `No results for “${query}”.`
+          : `No charts are currently listed in ${state.activeCategory}.`;
+        return;
+      }
+
+      if (query) {
+        els.statusText.textContent = `Showing ${filteredItems.length} match${filteredItems.length === 1 ? "" : "es"} for “${query}”${state.activeCategory === "All" ? "" : ` in ${state.activeCategory}`}.`;
+        return;
+      }
+
+      if (state.activeCategory !== "All") {
+        els.statusText.textContent = `${filteredItems.length} chart${filteredItems.length === 1 ? "" : "s"} currently visible in ${state.activeCategory}.`;
+        return;
+      }
+
+      els.statusText.textContent = `${total} chart${total === 1 ? "" : "s"} across ${categories} module${categories === 1 ? "" : "s"}.`;
+    }
+
+    function renderEmptyState(filteredItems) {
+      if (filteredItems.length) {
+        els.emptyState.hidden = true;
+        return;
+      }
+
+      if (state.errorMessage && !state.items.length) {
+        els.emptyTitle.textContent = "Library data unavailable";
+        els.emptyCopy.textContent = state.errorMessage;
+        els.emptyAction.textContent = "Reload page";
+      } else {
+        els.emptyTitle.textContent = "No matching charts";
+        els.emptyCopy.textContent = "Try another keyword or reset the current filters.";
+        els.emptyAction.textContent = "Reset filters";
+      }
+
+      els.emptyState.hidden = false;
     }
 
     function renderCards(items) {
-      els.galleryGrid.innerHTML = items.map(item => {
-        const codeButton = item.code_path
-          ? `
-            <a
-              href="${escapeHtml(item.code_path)}"
-              download="${escapeHtml(item.code_path.split("/").pop())}"
-              class="flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
-              style="background:${"var(--btn-code)"};"
-              onmouseover="this.style.background='var(--btn-code-hover)'"
-              onmouseout="this.style.background='var(--btn-code)'"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8 8 4 12l4 4" />
-                <path d="m16 8 4 4-4 4" />
-              </svg>
-              <span>查看代码</span>
-            </a>
-          `
-          : `
-            <span
-              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold opacity-60"
-              style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};"
-            >代码缺失</span>
-          `;
-
-        const dataButton = item.data_path
-          ? `
-            <a
-              href="${escapeHtml(item.data_path)}"
-              download="${escapeHtml(item.data_path.split("/").pop())}"
-              class="flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-center text-sm font-semibold text-white transition"
-              style="background:${"var(--btn-data)"};"
-              onmouseover="this.style.background='var(--btn-data-hover)'"
-              onmouseout="this.style.background='var(--btn-data)'"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3v18" />
-                <path d="M7 8h10" />
-                <path d="M7 12h10" />
-                <path d="M7 16h6" />
-              </svg>
-              <span>模板数据</span>
-            </a>
-          `
-          : `
-            <span
-              class="flex-1 rounded-xl px-4 py-3 text-center text-sm font-semibold opacity-60"
-              style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};"
-            >模板缺失</span>
-          `;
-
-        const previewLabel = `${item.category} Module`;
+      els.galleryGrid.innerHTML = items.map((item, index) => {
+        const tone = toneForCategory(item.category);
+        const layoutClass = getLayoutClass(index, items.length);
+        const descriptor = buildAssetDescriptor(item);
+        const toneStyle = [
+          `--tone:${tone.accent}`,
+          `--tone-soft:${tone.soft}`,
+          `--tone-ink:${tone.ink}`
+        ].join(";");
 
         return `
-          <article class="gallery-card glass overflow-hidden rounded-[24px]">
-            <div class="preview-shell aspect-[16/10] overflow-hidden">
-              <div data-preview-fallback class="preview-fallback">
-                <span class="preview-fallback-badge">${escapeHtml(previewLabel)}</span>
-                <div>
-                  <div class="preview-fallback-title">${escapeHtml(item.chart_name)}</div>
-                  <p class="preview-fallback-note">Preview image unavailable. The card remains usable for browsing code and sample data.</p>
+          <article class="catalog-card ${layoutClass}" data-reveal style="--delay:${Math.min(index + 1, 8)};${toneStyle}">
+            <div class="card-shell">
+              <div class="card-visual">
+                <div class="preview-frame">
+                  <span class="preview-tag">${escapeHtml(item.category || "Unsorted")}</span>
+                  <div data-preview-fallback class="preview-fallback">
+                    <div>
+                      <strong>${escapeHtml(item.chart_name || "Untitled chart")}</strong>
+                      <p>Preview unavailable. The script and template dataset remain accessible from this entry.</p>
+                    </div>
+                    <p>${escapeHtml(getCategoryPrompt(item.category || ""))}</p>
+                  </div>
+                  <img
+                    src="${escapeHtml(item.image_path || "")}"
+                    alt="${escapeHtml(item.chart_name || "Chart")} preview"
+                    class="preview-image"
+                    loading="lazy"
+                  />
                 </div>
               </div>
-              <img
-                src="${escapeHtml(item.image_path)}"
-                alt="${escapeHtml(item.chart_name)} preview"
-                class="preview-image"
-                loading="lazy"
-                onload="handleImageLoad(this)"
-                onerror="handleImageError(this)"
-              />
-            </div>
-            <div class="p-5">
-              <div class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
-                style="background:${"var(--chip-bg)"};color:${"var(--chip-text)"};">
-                ${escapeHtml(item.category)}
-              </div>
-              <h3 class="mt-3 text-xl font-bold">${escapeHtml(item.chart_name)}</h3>
-              <p class="mt-2 text-sm leading-6" style="color: var(--text-subtle);">
-                Reusable visualization asset with ready-to-browse preview, source script, and example data.
-              </p>
-              <div class="mt-5 flex gap-3">
-                ${codeButton}
-                ${dataButton}
+
+              <div class="card-body">
+                <p class="card-index-mark">Entry ${formatCardIndex(index)}</p>
+
+                <div class="card-kicker">
+                  <span class="category-pill">${escapeHtml(item.category || "Unsorted")}</span>
+                  <span class="asset-line">${escapeHtml(descriptor || "Metadata only")}</span>
+                </div>
+
+                <h3 class="card-title">${escapeHtml(item.chart_name || "Untitled chart")}</h3>
+                <p class="card-summary">${escapeHtml(getCategoryNarrative(item.category || ""))}</p>
+                <p class="card-meta">
+                  <span>Preview: ${escapeHtml(item.image_path || "Not available")}</span>
+                  <span>Source: ${escapeHtml(item.code_path || "Not available")}</span>
+                </p>
+
+                <div class="card-actions">
+                  ${buildActionLink(item.code_path, `Open ${getCodeLabel(item.code_path) || "source"} script`, "primary")}
+                  ${buildActionLink(item.data_path, `Open ${getExtension(item.data_path).toUpperCase() || "template"} data`, "secondary")}
+                </div>
               </div>
             </div>
           </article>
         `;
       }).join("");
-
-      els.emptyState.classList.toggle("hidden", items.length !== 0);
-    }
-
-    function renderStatus(filteredCount) {
-      els.statusText.textContent = `Showing ${filteredCount} of ${state.items.length} chart(s)`;
     }
 
     function render() {
-      const filtered = getFilteredItems();
+      const filteredItems = getFilteredItems();
+      renderHeroIndex();
+      renderSummaryRail();
       renderCategoryBar();
-      renderCards(filtered);
-      renderStatus(filtered.length);
+      renderStatus(filteredItems);
+      renderCards(filteredItems);
+      syncPreviewStates();
+      renderEmptyState(filteredItems);
     }
 
     function handleImageLoad(image) {
       const fallback = image.parentElement.querySelector("[data-preview-fallback]");
+
+      image.hidden = false;
+
       if (fallback) {
-        fallback.classList.add("hidden");
+        fallback.hidden = true;
       }
-      image.classList.remove("hidden");
     }
 
     function handleImageError(image) {
-      image.classList.add("hidden");
-      image.removeAttribute("alt");
+      image.hidden = true;
       const fallback = image.parentElement.querySelector("[data-preview-fallback]");
+
       if (fallback) {
-        fallback.classList.remove("hidden");
+        fallback.hidden = false;
       }
     }
 
+    function syncPreviewStates() {
+      const previewImages = els.galleryGrid.querySelectorAll(".preview-image");
+
+      previewImages.forEach(image => {
+        if (!image.getAttribute("src")) {
+          handleImageError(image);
+          return;
+        }
+
+        image.addEventListener("load", () => {
+          handleImageLoad(image);
+        }, { once: true });
+
+        image.addEventListener("error", () => {
+          handleImageError(image);
+        }, { once: true });
+
+        if (image.complete) {
+          if (image.naturalWidth > 0) {
+            handleImageLoad(image);
+          } else {
+            handleImageError(image);
+          }
+        }
+      });
+    }
+
     function hydrateItems(items) {
+      state.errorMessage = "";
       state.items = Array.isArray(items) ? items : [];
       state.randomizedItems = shuffleItems(state.items);
+
+      if (!getCategories(state.items).includes(state.activeCategory)) {
+        state.activeCategory = "All";
+      }
+
       render();
     }
 
     async function init() {
       try {
         const response = await fetch("./gallery_data.json", { cache: "no-cache" });
+
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
@@ -432,10 +1708,18 @@
           return;
         }
 
-        els.galleryGrid.innerHTML = "";
-        els.emptyState.classList.remove("hidden");
-        els.statusText.textContent = `Failed to load gallery data: ${error.message}`;
+        state.items = [];
+        state.randomizedItems = [];
+        state.errorMessage = `Failed to load gallery_data.json and no fallback dataset was found. Original error: ${error.message}.`;
+        render();
       }
+    }
+
+    function resetFilters() {
+      state.activeCategory = "All";
+      state.searchText = "";
+      els.searchInput.value = "";
+      render();
     }
 
     els.searchInput.addEventListener("input", event => {
@@ -445,11 +1729,28 @@
 
     els.categoryBar.addEventListener("click", event => {
       const button = event.target.closest("button[data-category]");
+
       if (!button) {
         return;
       }
+
       state.activeCategory = button.dataset.category;
       render();
+    });
+
+    els.emptyAction.addEventListener("click", () => {
+      if (state.errorMessage && !state.items.length) {
+        window.location.reload();
+        return;
+      }
+
+      resetFilters();
+    });
+
+    window.addEventListener("keydown", event => {
+      if (event.key === "Escape" && state.searchText) {
+        resetFilters();
+      }
     });
 
     init();
